@@ -8,6 +8,8 @@ import ErrorPage from './component/Error_page.jsx';
 import AuthProvider from './component/AuthProvider.jsx'
 import Login from './component/Login.jsx';
 import Registration from './component/Registration.jsx'
+import AddBlog from './component/AddBlog.jsx'
+import AllBlogs from './component/AllBlogs.jsx'
 import {
   createBrowserRouter, 
   RouterProvider, 
@@ -27,6 +29,12 @@ import {
       },
       { path: "/Registration",
       element: <Registration></Registration>
+      },
+      { path: "/AddBlog",
+      element: <AddBlog></AddBlog>
+      },
+      { path: "/AllBlogs",
+      element: <AllBlogs></AllBlogs>
       },
     ]
   }, 

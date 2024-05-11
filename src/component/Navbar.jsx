@@ -31,9 +31,10 @@ const Navbar = () => {
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2  rounded-box w-40 bg-zinc-100">
                             <li className="hover:text-[#ff6481]"><Link to="/">Home</Link></li>
-                            <li className="hover:text-[#ff6481]"><Link to="/AllItems">All Items</Link></li>
-                            <li className="hover:text-[#ff6481]"><Link to="/AddItem">Add Item</Link></li>
-                            <li className="hover:text-[#ff6481]"><Link to={`/MyList/${user?.email}`}>My List</Link></li>
+                            <li className="hover:text-[#ff6481]"><Link to="/AllBlogs">All Blogs</Link></li>
+                            <li className="hover:text-[#ff6481]"><Link to="/FeaturedBlogs">Featured Blogs</Link></li>
+                            <li className="hover:text-[#ff6481]"><Link to={`/AddBlog/${user?.email}`}>Add Blog</Link></li>
+                            <li className="hover:text-[#ff6481]"><Link to={`/Wishlist/${user?.email}`}>Wishlist</Link></li>
                         </ul>
                     </div>
                     <div className="">
@@ -45,14 +46,15 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="flex justify-between pacifico text-lg font-semibold gap-4">
-                        <li className="hover:text-[#ff6481]"><Link to="/">Home</Link></li>
-                        <li className="hover:text-[#ff6481]"><Link to="/AllItems">All Items</Link></li>
-                        <li className="hover:text-[#ff6481]"><Link to="/AddItem">Add Item</Link></li>
-                        <li className="hover:text-[#ff6481]"><Link to={`/MyList/${user?.email}`}>My List</Link></li>
+                            <li className="hover:text-[#ff6481]"><Link to="/">Home</Link></li>
+                            <li className="hover:text-[#ff6481]"><Link to="/AllBlogs">All Blogs</Link></li>
+                            <li className="hover:text-[#ff6481]"><Link to="/FeaturedBlogs">Featured Blogs</Link></li>
+                            {/* <li className="hover:text-[#ff6481]"><Link to={`/AddBlog/${user?.email}`}>Add Blog</Link></li> */}
+                            <li className="hover:text-[#ff6481]"><Link to="/AddBlog">Add Blog</Link></li>
+                            <li className="hover:text-[#ff6481]"><Link to={`/Wishlist/${user?.email}`}>Wishlist</Link></li>
                     </ul>
                 </div>
                 <div className="flex flex-col md:flex-row gap-2 navbar-end pacifico">
-                    
                     {
                         user ? <div className="dropdown dropdown-hover">
                             <label tabIndex={0} role="buttton" className="btn btn-ghost btn-circle">
@@ -69,10 +71,10 @@ const Navbar = () => {
                         :
                         <div className="flex flex-col md:flex-row gap-4">
                             <Link to="/Login" className="flex flex-col lg:flex-row gap-2 lg:gap-0" >
-                            <a className="btn bg-transparent text-[#fcbb02] border-3 border-[#fcbb02] text-base lg:text-base font-semibold hover:bg-[#9797974e]"> Login</a>
+                            <a className="btn text-white bg-[#ff6481] text-base lg:text-base font-semibold hover:bg-[#31292d]"> Login</a>
                             </Link>
                             <Link to="/Registration" className="flex flex-col lg:flex-row gap-2 lg:gap-0" >
-                            <a className="btn bg-transparent text-[#fcbb02] border-3 border-[#fcbb02] text-base lg:text-base font-semibold hover:bg-[#9797974e]"> Registration</a>
+                            <a className="btn text-white bg-[#ff6481] text-base lg:text-base font-semibold hover:bg-[#31292d]"> Registration</a>
                             </Link>
                         </div>
                     }
