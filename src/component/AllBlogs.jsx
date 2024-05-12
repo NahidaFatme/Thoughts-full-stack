@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "./AuthProvider";
 import axios from "axios";
 import { Link, useLoaderData } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa6";
@@ -8,11 +9,14 @@ import { BiSolidCategoryAlt } from "react-icons/bi";
 import { FaReadme } from "react-icons/fa6";
 import { FaArrowDown } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
-const AllBlogs = () => {
+import { ToastContainer, toast } from 'react-toastify';
 
+const AllBlogs = () => {
+    const { user } = useContext(AuthContext);
     const loadedBlogs = useLoaderData();
     const [blogs, setBlogs] =  useState(loadedBlogs);
     const [query, setQuery] = useState([]);
+    const [wishlistBlogs, setWishlistBlogs] = useState([]);
 
     useEffect(() => {
         document.title = "All Blogs";
@@ -38,6 +42,30 @@ const AllBlogs = () => {
          }
          setBlogs(filteredBlogs);
     };
+
+
+    const handleWishlist = (_id) => {
+        const email = user.email;
+        const selectedBlog = blogs.find(blog => blog._id === _id);
+        if (selectedBlog) {
+            const { full_description, short_description, category, title, photo } = selectedBlog;
+            const wishBlog = { full_description, short_description, category, title, photo, email };
+    
+            // Make a POST request to add the wishlist blog to the server
+            axios.post('http://localhost:5000/wishlist', wishBlog)
+                .then(response => {
+                    if (response.data.insertedId) {
+                        toast.success("Blog added to Wishlist");
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        } else {
+            console.error("Blog not found");
+        }
+    };
+    
 
     const handleSearch = async () => {
         try {
@@ -93,7 +121,7 @@ const AllBlogs = () => {
                 {/* search option */}
                 <div>
                     <label className="input input-bordered flex items-center gap-2">
-                        <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} className="grow" />
+                        <input type="text" placeholder="Search by title" value={query} onChange={(e) => setQuery(e.target.value)} className="grow" />
                         <button onClick={handleSearch}><FaSearch /></button>
                     </label>
                 </div>
@@ -109,7 +137,7 @@ const AllBlogs = () => {
                             <h1 className="text-2xl font-bold">{blog.title}</h1>
                             <p className="text-base font-medium text-justify">{blog.short_description}</p>
                             <div className="flex justify-end gap-5 pt-8 md:pt-0">
-                                <p className="bg-white shadow-lg text-[#ff6481] rounded-full p-3 text-lg hover:bg-[#31292d]"><RiHeartAdd2Fill /></p>
+                                <p onClick={()=> handleWishlist(blog._id)} className="bg-white shadow-lg text-[#ff6481] rounded-full p-3 text-lg hover:bg-[#31292d]"><RiHeartAdd2Fill /></p>
                                 <button className="bg-white shadow-lg rounded-full text-sm font-semibold px-6 py-2 flex items-center gap-2 hover:bg-[#31292d] hover:text-white">Read Details <FaArrowRight /></button>
                             </div>
                         </div>
