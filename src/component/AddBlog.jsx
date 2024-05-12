@@ -48,8 +48,8 @@ const AddBlog = () => {
 
     return (
         <div className="mx-auto py-0 md:py-16">
-            <div className="text-center mb-10">
-                <h1 className="mx-auto pacifico text-[#ff6481] text-4xl font-bold animate__animated animate__backInRight">Write New Blog</h1>
+            <div className="text-center mt-10 md:mt-5 mb-10">
+                <h1 className="mx-auto text-[#ff6481] text-2xl md:text-4xl font-bold animate__animated animate__backInRight">Write New Blog</h1>
             </div>
             {/* form start */}
             <div className="bg-white shadow-2xl p-5 md:p-20 w-11/12 md:w-full mx-auto rounded-2xl">

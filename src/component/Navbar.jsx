@@ -26,14 +26,14 @@ const Navbar = () => {
             <div className="navbar px-1 md:px-12 lg:px-24 py-4">
                 <div className="navbar-start">
                     <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden text-white">
+                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden text-[#ff6481]">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2  rounded-box w-40 bg-zinc-100">
                             <li className="hover:text-[#ff6481]"><Link to="/">Home</Link></li>
                             <li className="hover:text-[#ff6481]"><Link to="/AllBlogs">All Blogs</Link></li>
                             <li className="hover:text-[#ff6481]"><Link to="/FeaturedBlogs">Featured Blogs</Link></li>
-                            <li className="hover:text-[#ff6481]"><Link to={`/AddBlog/${user?.email}`}>Add Blog</Link></li>
+                            <li className="hover:text-[#ff6481]"><Link to="/AddBlog">Add Blog</Link></li>
                             <li className="hover:text-[#ff6481]"><Link to={`/Wishlist/${user?.email}`}>Wishlist</Link></li>
                         </ul>
                     </div>
