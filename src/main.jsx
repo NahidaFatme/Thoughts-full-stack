@@ -10,6 +10,7 @@ import Login from './component/Login.jsx';
 import Registration from './component/Registration.jsx'
 import AddBlog from './component/AddBlog.jsx'
 import AllBlogs from './component/AllBlogs.jsx'
+import FeaturedBlogs from './component/FeaturedBlogs.jsx'
 import {
   createBrowserRouter, 
   RouterProvider, 
@@ -34,7 +35,11 @@ import {
       element: <AddBlog></AddBlog>
       },
       { path: "/AllBlogs",
-      element: <AllBlogs></AllBlogs>
+      element: <AllBlogs></AllBlogs>,
+      loader: () => fetch('http://localhost:5000/blogs')
+      },
+      { path: "/FeaturedBlogs",
+      element: <FeaturedBlogs></FeaturedBlogs>
       },
     ]
   }, 
