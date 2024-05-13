@@ -1,60 +1,54 @@
-import { useContext, useState } from "react";
+import { useEffect, useContext } from "react";
+import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
-import { useEffect } from "react";
+import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../index.css';
-import axios from "axios";
 
-const AddBlog = () => {
+const Update = () => {
+    const blog = useLoaderData();
+    const { user } = useContext(AuthContext);
+    const { _id } = blog;
 
-    const { user, loading } = useContext(AuthContext);
-    if (loading) {
-        return <span className="loading loading-spinner loading-lg"></span>
-    }
     useEffect(() => {
-        document.title = "Add new item";
+        document.title = "Update Blog";
     }, []);
 
-    const handleAddItem = event => {
+    const handleUpdate = event => {
+
         event.preventDefault();
-
-        const creation_time = new Date().toISOString();
-
+        
         const form = event.target;
 
         const full_description = form.full_description.value;
         const short_description = form.short_description.value;
         const category = form.category.value;
         const title = form.title.value;
-        const user_name = form.user_name.value;
-        const email = form.email.value;
         const photo = form.photo.value;
-        const userPhoto = form.userPhoto.value;
-        
-        const newBlogs = {full_description,short_description, category, title, user_name, email, photo, userPhoto, creation_time}
 
+        const updatedBlog = { title, category, short_description, full_description, photo};
 
-        // fetch data using axios 
-        axios.post('http://localhost:5000/blogs', newBlogs)
-          .then(data => {
-            if(data.data.insertedId){
-                toast.success("Blog added successfully");
+        axios.put( `http://localhost:5000/blogs/update/${blog._id}`, updatedBlog)
+        .then(data => {
+            if(data.data.modifiedCount > 0){
+                toast.success("Blog Updated Successfully");
             }
           })
           .catch(function (error) {
             console.log(error);
           });
+        
     }
 
     return (
         <div className="mx-auto py-0 md:py-16">
             <div className="text-center mt-10 md:mt-5 mb-10">
-                <h1 className="mx-auto text-[#ff6481] text-2xl md:text-4xl font-bold animate__animated animate__backInRight">Write New Blog</h1>
+                <h1 className="mx-auto text-[#ff6481] text-2xl md:text-4xl font-bold animate__animated animate__backInRight">Update Blogs</h1>
             </div>
             {/* form start */}
             <div className="bg-white shadow-2xl p-5 md:p-20 w-11/12 md:w-full mx-auto rounded-2xl">
-                <form onSubmit={handleAddItem}>
+                <form onSubmit={handleUpdate}>
                     <div className="flex flex-col md:flex-row gap-12">
                         <div className="w-full md:w-[40%]">
                         {/*  row 1*/}
@@ -64,13 +58,12 @@ const AddBlog = () => {
                                         <span className="label-text text-lg font-bold text-[#363853]">Title</span>
                                     </label>
                                     <label className="input-group">
-                                        <input type="text" name="title" placeholder="Name" className="input input-bordered w-full" />
+                                        <input type="text" defaultValue={blog.title} name="title"  className="input input-bordered w-full" />
                                     </label>
                                 </div>
                                 <div className="form-control w-full">
                                     <label className="label text-lg font-bold text-[#363853]">Category</label>
-                                    <select className="select select-bordered w-full" name="category">
-                                        <option disabled selected>Select One</option>
+                                    <select className="select select-bordered w-full" defaultValue={blog.category} name="category" >
                                         <option value="Technology & Gadgets">Technology & Gadgets</option>
                                         <option value="Travel & Adventure">Travel & Adventure</option>
                                         <option value="Food & Recipes">Food & Recipes</option>
@@ -89,35 +82,15 @@ const AddBlog = () => {
                                     </label>
                                     <label className="input-group">
                                         <textarea
+                                            defaultValue={blog.short_description}
                                             name="short_description"
-                                            placeholder="Write short description of the blog....."
                                             className="input input-bordered w-full resize-none"
                                             style={{ minHeight: '4rem' }}
                                         ></textarea>
                                     </label>
                                 </div>
                             </div>
-                            {/* row 5*/}
-                            <div className="md:flex ">
-                                {/* name */}
-                                <div className="form-control md:w-1/2">
-                                    <label className="input-group">
-                                        <input type="hidden" name="user_name" value={user.displayName}  className="input input-bordered w-full" />
-                                    </label>
-                                </div>
-                                {/* email */}
-                                <div className="form-control md:w-1/2 ml-0 md:ml-4">
-                                    <label className="input-group">
-                                        <input type="hidden" name="email" value={user.email} className="input input-bordered w-full" />
-                                    </label>
-                                </div>
-                                {/* photo url */}
-                                <div className="form-control md:w-1/2 ml-0 md:ml-4">
-                                    <label className="input-group">
-                                        <input type="hidden" name="userPhoto" value={user.photoURL} className="input input-bordered w-full" />
-                                    </label>
-                                </div>
-                            </div>
+                            
                             {/* form Photo url row */}
                             <div className="mb-8">
                                 <div className="form-control w-full">
@@ -125,7 +98,7 @@ const AddBlog = () => {
                                         <span className="label-text text-lg font-bold text-[#363853]">Photo URL</span>
                                     </label>
                                     <label className="input-group">
-                                        <input type="text" name="photo" placeholder="Photo URL" className="input input-bordered w-full" />
+                                        <input type="text" name="photo" defaultValue={blog.photo}  className="input input-bordered w-full" />
                                     </label>
                                 </div>
                             </div>
@@ -139,8 +112,8 @@ const AddBlog = () => {
                                     </label>
                                     <label className="input-group">
                                         <textarea
+                                            defaultValue={blog.full_description}
                                             name="full_description"
-                                            placeholder="Write full description of the blog....."
                                             className="input input-bordered w-full resize-none"
                                             style={{ minHeight: '27rem' }}
                                         ></textarea>
@@ -149,11 +122,11 @@ const AddBlog = () => {
                             </div>
                         </div>
                     </div>
-                    <input type="submit" value="Add Blog" className="btn btn-block bg-[#ff6481]" />
+                    <input type="submit" value="Update Blog" className="btn btn-block bg-[#ff6481]" />
                 </form>
             </div>
         </div>
     );
 };
 
-export default AddBlog;
+export default Update;

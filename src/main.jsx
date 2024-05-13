@@ -13,6 +13,7 @@ import AllBlogs from './component/AllBlogs.jsx'
 import FeaturedBlogs from './component/FeaturedBlogs.jsx'
 import Wishlist from './component/Wishlist.jsx'
 import Details from './component/Details.jsx'
+import Update from './component/Update.jsx'
 import {
   createBrowserRouter, 
   RouterProvider, 
@@ -50,7 +51,11 @@ import {
       { path: "/Details/:id",
       element: <Details></Details>,
       loader: ({params}) => fetch(`http://localhost:5000/blogs/id/${params.id}`)
-    },
+      },
+      { path: "/Update/:id",
+      element: <Update></Update>,
+      loader: ({params}) => fetch(`http://localhost:5000/blogs/id/${params.id}`)
+      },
     ]
   }, 
  ]); 
