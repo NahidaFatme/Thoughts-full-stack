@@ -81,10 +81,10 @@ const Details = () => {
                 {/* User comment */}
                 {
                     loadedBlogs.email !== user?.email ? <form onSubmit={handleSubmitComment}>
-                        <div className="border-2 border-t-red-400 p-10 w-full">
+                        <div className="border-2 border-t-red-400 p-4 md:p-10 w-full">
                             <div className="flex gap-5 justify-start">
                                 <textarea  name="comment" placeholder="Write a commnet" className="textarea textarea-bordered textarea-lg w-full max-w-full" ></textarea>
-                                <button  className="text-6xl text-[#ff6481] hover:text-[#31292d] rounded-full"><IoArrowRedoCircleSharp/></button>
+                                <button  className="text-3xl md:text-6xl text-[#ff6481] hover:text-[#31292d] rounded-full"><IoArrowRedoCircleSharp/></button>
                             </div>
                         </div>
                     </form>

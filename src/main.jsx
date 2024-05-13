@@ -14,6 +14,7 @@ import FeaturedBlogs from './component/FeaturedBlogs.jsx'
 import Wishlist from './component/Wishlist.jsx'
 import Details from './component/Details.jsx'
 import Update from './component/Update.jsx'
+import PrivateRoute from './component/PrivateRoute.jsx'
 import {
   createBrowserRouter, 
   RouterProvider, 
@@ -35,7 +36,7 @@ import {
       element: <Registration></Registration>
       },
       { path: "/AddBlog",
-      element: <AddBlog></AddBlog>
+      element: <PrivateRoute><AddBlog></AddBlog></PrivateRoute>
       },
       { path: "/AllBlogs",
       element: <AllBlogs></AllBlogs>,
@@ -45,15 +46,15 @@ import {
       element: <FeaturedBlogs></FeaturedBlogs>
       },
       { path: "/Wishlist/:email",
-      element: <Wishlist></Wishlist>,
+      element: <PrivateRoute><Wishlist></Wishlist></PrivateRoute>,
       loader: ({params}) => fetch(`http://localhost:5000/wishlist/email/${params.email}`)
       },
       { path: "/Details/:id",
-      element: <Details></Details>,
+      element: <PrivateRoute><Details></Details></PrivateRoute>,
       loader: ({params}) => fetch(`http://localhost:5000/blogs/id/${params.id}`)
       },
       { path: "/Update/:id",
-      element: <Update></Update>,
+      element: <PrivateRoute><Update></Update></PrivateRoute>,
       loader: ({params}) => fetch(`http://localhost:5000/blogs/id/${params.id}`)
       },
     ]
