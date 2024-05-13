@@ -12,6 +12,7 @@ import AddBlog from './component/AddBlog.jsx'
 import AllBlogs from './component/AllBlogs.jsx'
 import FeaturedBlogs from './component/FeaturedBlogs.jsx'
 import Wishlist from './component/Wishlist.jsx'
+import Details from './component/Details.jsx'
 import {
   createBrowserRouter, 
   RouterProvider, 
@@ -46,6 +47,10 @@ import {
       element: <Wishlist></Wishlist>,
       loader: ({params}) => fetch(`http://localhost:5000/wishlist/email/${params.email}`)
       },
+      { path: "/Details/:id",
+      element: <Details></Details>,
+      loader: ({params}) => fetch(`http://localhost:5000/blogs/id/${params.id}`)
+    },
     ]
   }, 
  ]); 

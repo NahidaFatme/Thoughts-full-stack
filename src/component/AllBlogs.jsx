@@ -138,7 +138,7 @@ const AllBlogs = () => {
                             <p className="text-base font-medium text-justify">{blog.short_description}</p>
                             <div className="flex justify-end gap-5 pt-8 md:pt-0">
                                 <p onClick={()=> handleWishlist(blog._id)} className="bg-white shadow-lg text-[#ff6481] rounded-full p-3 text-lg hover:bg-[#31292d]"><RiHeartAdd2Fill /></p>
-                                <button className="bg-white shadow-lg rounded-full text-sm font-semibold px-6 py-2 flex items-center gap-2 hover:bg-[#31292d] hover:text-white">Read Details <FaArrowRight /></button>
+                                <Link to={`/Details/${blog._id}`} className="bg-white shadow-lg rounded-full text-sm font-semibold px-6 py-2 flex items-center gap-2 hover:bg-[#31292d] hover:text-white">Read Details <FaArrowRight /></Link>
                             </div>
                         </div>
                     </div>
