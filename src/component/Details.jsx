@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "./AuthProvider";
-import { useLoaderData, Link } from "react-router-dom";
+import { useLoaderData, Link, useParams  } from "react-router-dom";
 import { IoArrowRedoCircleSharp } from "react-icons/io5";
 import { ImCross } from "react-icons/im";
 import { FaEdit } from "react-icons/fa";
@@ -8,17 +8,28 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import { GoComment } from "react-icons/go";
 import '../index.css';
-
+import { useQuery } from '@tanstack/react-query'
 
 const Details = () => {
+
     const { user } = useContext(AuthContext);
-    const loadedBlogs = useLoaderData();
+    const [loadedBlogs, setBlog] = useState([]);
     const [comments, setComments] = useState([]);
-    useEffect(() => {
-        document.title = "Details";
-    }, []);
+    const { id } = useParams();
 
     useEffect(() => {
+        document.title = "Details";
+        // Fetch blog details
+        axios.get(`http://localhost:5000/blogs/id/${id}`, { withCredentials: true })
+            .then(res => {
+                setBlog(res.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
+
+    const fetchComments = () => {
         axios.get(`http://localhost:5000/comments/id/${loadedBlogs._id}`)
             .then(res => {
                 setComments(res.data);
@@ -26,9 +37,15 @@ const Details = () => {
             .catch(error => {
                 console.error(error);
             });
-    }, [loadedBlogs._id]);
+    };
 
-    
+    useEffect(() => {
+        fetchComments(); 
+        const interval = setInterval(fetchComments, 5000); 
+        return () => clearInterval(interval); 
+    }, [loadedBlogs]);
+
+    // submit comments
     const handleSubmitComment = e => {
         e.preventDefault();
         const form = e.target;
@@ -38,12 +55,13 @@ const Details = () => {
         const commenter_photo = user.photoURL;
         const blogId = loadedBlogs._id;
 
-        const Onecomment = {comment,commenter_name, commenter_photo, blogId};
+        const Onecomment = {comment, commenter_name, commenter_photo, blogId};
 
-        axios.post('http://localhost:5000/comments', Onecomment)
+        axios.post('http://localhost:5000/comments', Onecomment, { withCredentials: true })
           .then(data => {
             if(data.data.insertedId){
                 toast.success("Comment added");
+                fetchComments(); // Fetch comments again after adding a new comment
             }
           })
           .catch(function (error) {
@@ -51,6 +69,7 @@ const Details = () => {
           });
         form.comment.value = '';
     }
+
     return (
         <div className="mx-auto py-5 md:py-16">
             <div className="bg-white h-full shadow-md rounded-3xl flex flex-col gap-4 md:gap-8">

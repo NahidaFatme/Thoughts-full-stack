@@ -1,5 +1,5 @@
-import { useEffect, useContext } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { useEffect, useContext, useState } from "react";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
@@ -7,12 +7,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../index.css';
 
 const Update = () => {
-    const blog = useLoaderData();
+
+    const [blog, setBlog] = useState([]);
     const { user } = useContext(AuthContext);
     const { _id } = blog;
+    const { id } = useParams();
 
     useEffect(() => {
         document.title = "Update Blog";
+        // Fetch blog details
+        axios.get(`http://localhost:5000/blogs/id/${id}`, { withCredentials: true })
+            .then(res => {
+                setBlog(res.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }, []);
 
     const handleUpdate = event => {

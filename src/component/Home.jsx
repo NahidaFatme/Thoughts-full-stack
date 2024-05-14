@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-
+import Banner from "./Banner";
 const Home = () => {
     useEffect(() => {
         document.title = "Home";
     }, []);
     return (
         <div>
-            <h1 className="text-white">home page</h1>
+            <Banner></Banner>
         </div>
     );
 };

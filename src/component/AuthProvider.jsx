@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import app from "./firebase";
 import {signInWithPopup, signOut, updateProfile, GithubAuthProvider } from "firebase/auth";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -42,12 +43,33 @@ const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, currentUser =>{
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            const userEmail = currentUser?.email || user?.email;
+            const loggedUser = { email: userEmail };
             setUser(currentUser);
             SetLoading(false);
+            // issue token
+            if (currentUser) {
+                axios.post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
+                    .then(res => {
+                        console.log('Token response', res.data);
+                    })
+                    .catch(error => {
+                        console.error('Token error', error);
+                    });
+            }
+            else {
+                axios.post('http://localhost:5000/logout', loggedUser, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data);
+                    })
+                    .catch(error => {
+                        console.error('Logout error', error);
+                    });
+            }
         });
         return () => {
-            unSubscribe ();
+            unsubscribe ();
         }
     },[])
 

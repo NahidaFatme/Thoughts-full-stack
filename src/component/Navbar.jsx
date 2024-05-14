@@ -34,7 +34,7 @@ const Navbar = () => {
                             <li className="hover:text-[#ff6481]"><Link to="/AllBlogs">All Blogs</Link></li>
                             <li className="hover:text-[#ff6481]"><Link to="/FeaturedBlogs">Featured Blogs</Link></li>
                             <li className="hover:text-[#ff6481]"><Link to="/AddBlog">Add Blog</Link></li>
-                            <li className="hover:text-[#ff6481]"><Link to={`/Wishlist/${user?.email}`}>Wishlist</Link></li>
+                            <li className="hover:text-[#ff6481]"><Link to="/Wishlist">Wishlist</Link></li>
                         </ul>
                     </div>
                     <div className="">
@@ -51,7 +51,7 @@ const Navbar = () => {
                             <li className="hover:text-[#ff6481]"><Link to="/FeaturedBlogs">Featured Blogs</Link></li>
                             {/* <li className="hover:text-[#ff6481]"><Link to={`/AddBlog/${user?.email}`}>Add Blog</Link></li> */}
                             <li className="hover:text-[#ff6481]"><Link to="/AddBlog">Add Blog</Link></li>
-                            <li className="hover:text-[#ff6481]"><Link to={`/Wishlist/${user?.email}`}>Wishlist</Link></li>
+                            <li className="hover:text-[#ff6481]"><Link to="/Wishlist">Wishlist</Link></li>
                     </ul>
                 </div>
                 <div className="flex flex-col md:flex-row gap-2 navbar-end pacifico">

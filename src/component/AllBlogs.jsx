@@ -52,7 +52,7 @@ const AllBlogs = () => {
             const wishBlog = { full_description, short_description, category, title, photo, email };
     
             // Make a POST request to add the wishlist blog to the server
-            axios.post('http://localhost:5000/wishlist', wishBlog)
+            axios.post('http://localhost:5000/wishlist', wishBlog, { withCredentials: true })
                 .then(response => {
                     if (response.data.insertedId) {
                         toast.success("Blog added to Wishlist");

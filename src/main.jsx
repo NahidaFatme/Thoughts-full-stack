@@ -45,17 +45,14 @@ import {
       { path: "/FeaturedBlogs",
       element: <FeaturedBlogs></FeaturedBlogs>
       },
-      { path: "/Wishlist/:email",
-      element: <PrivateRoute><Wishlist></Wishlist></PrivateRoute>,
-      loader: ({params}) => fetch(`http://localhost:5000/wishlist/email/${params.email}`)
+      { path: "/Wishlist",
+      element: <PrivateRoute><Wishlist></Wishlist></PrivateRoute>
       },
       { path: "/Details/:id",
-      element: <PrivateRoute><Details></Details></PrivateRoute>,
-      loader: ({params}) => fetch(`http://localhost:5000/blogs/id/${params.id}`)
+      element: <PrivateRoute><Details></Details></PrivateRoute>
       },
       { path: "/Update/:id",
-      element: <PrivateRoute><Update></Update></PrivateRoute>,
-      loader: ({params}) => fetch(`http://localhost:5000/blogs/id/${params.id}`)
+      element: <PrivateRoute><Update></Update></PrivateRoute>
       },
     ]
   }, 

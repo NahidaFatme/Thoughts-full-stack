@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "./AuthProvider";
 import { Link, useLoaderData } from "react-router-dom";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { TbListDetails } from "react-icons/tb";
@@ -6,12 +7,17 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import '../index.css';
 const Wishlist = () => {
-    const Loadedwishlistblogs = useLoaderData();
-    const [wishlistblogs, setWishlistblogs] = useState(Loadedwishlistblogs);
+    const { user } = useContext(AuthContext);
+    const [wishlistblogs, setWishlistblogs] = useState([]);
     
     useEffect(() => {
         document.title = "Wishlist";
+        axios.get('http://localhost:5000/wishlist', { withCredentials: true })
+            .then(res => setWishlistblogs(res.data))
+            .catch(error => console.error('Fetch wishlist error', error));
     }, []);
+
+    
 
     const handleDelete = (_id) => {
         Swal.fire({
@@ -25,7 +31,7 @@ const Wishlist = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:5000/wishlist/delete/${_id}`)
+                axios.delete(`http://localhost:5000/wishlist/delete/${_id}`, { withCredentials: true })
                     .then(data => {
                         if (data.data.deletedCount > 0) {
                             Swal.fire(
