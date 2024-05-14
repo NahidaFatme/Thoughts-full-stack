@@ -6,6 +6,7 @@ import { TbListDetails } from "react-icons/tb";
 import Swal from "sweetalert2";
 import axios from "axios";
 import '../index.css';
+
 const Wishlist = () => {
     const { user } = useContext(AuthContext);
     const [wishlistblogs, setWishlistblogs] = useState([]);

@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "./AuthProvider";
 import bg1 from "../Images/bg1.png";
 import '../index.css';
 import { TfiThought } from "react-icons/tfi";
@@ -9,7 +10,55 @@ import food from "../Images/food.jpg";
 import enter from "../Images/enter.jpg";
 import health from "../Images/health2.jpg";
 import tech from "../Images/9614596.jpg";
+import axios from "axios";
+import { RiDeleteBin5Fill } from "react-icons/ri";
+import { TbListDetails } from "react-icons/tb";
+import { Link, useLoaderData } from "react-router-dom";
+import { FaHeartCirclePlus } from "react-icons/fa6";
+import { ToastContainer, toast } from 'react-toastify';
+
+
 const Banner = () => {
+
+    const { user } = useContext(AuthContext);
+    const [blogs, setBlogs] = useState([]);
+    
+    
+    // get recent blogs
+    useEffect(() => {
+        axios.get('http://localhost:5000/blogs/recent')
+        .then(res => {
+            setBlogs(res.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }, []);
+    
+
+    //    adding blogs to wishliist
+    const handleWishlist = (_id) => {
+        const email = user.email;
+        const selectedBlog = blogs.find(blog => blog._id === _id);
+        if (selectedBlog) {
+            const { full_description, short_description, category, title, photo } = selectedBlog;
+            const wishBlog = { full_description, short_description, category, title, photo, email };
+    
+            // Make a POST request to add the wishlist blog to the server
+            axios.post('http://localhost:5000/wishlist', wishBlog, { withCredentials: true })
+                .then(response => {
+                    if (response.data.insertedId) {
+                        toast.success("Blog added to Wishlist");
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        } else {
+            console.error("Blog not found");
+        }
+    };
+
     return (
         <div>
             <section className="my-16 flex items-center gap-12">
@@ -55,6 +104,34 @@ const Banner = () => {
                         <p className="text-sm text-stone-500 font-semibold">Technology</p>
                     </div>
                 </div>
+            </section>
+
+
+            {/* wishlist */}
+            <section className="my-36">
+                <p className=" text-2xl font-bold flex gap-3 justify-center">Recent Blogs<FaBolt className="text-[#ff6481] mb-12" /></p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
+                    {
+                        blogs.map(blog => <div>
+                            <div className="bg-white w-full shadow-md rounded-xl">
+                                <div className="h-[230px] w-full rounded-xl mb-6">
+                                    <img src={blog.photo} className="h-full w-full rounded-t-xl object-cover" alt="" />
+                                </div>
+                                <div className="p-6 flex flex-col gap-6">
+                                    <h1 className="text-2xl font-bold">{blog.title}</h1>
+                                    <p className="text-[#2a9df4] text-sm font-medium text-wrap">{blog.category}</p>
+                                    <p className="text-sm font-medium text-wrap">{blog.short_description}</p>
+                                    <div className="text-xl font-semibold flex items-center justify-center gap-3">
+                                        <p onClick={()=> handleWishlist(blog._id)}  className="text-[#ff6481] hover:text-[#31292d]"><FaHeartCirclePlus /></p>
+                                        <p className="text-[#ff6481]">|</p>
+                                        <Link to={`/Details/${blog._id}`} className="text-[#2a9df4] hover:text-[#31292d]"><TbListDetails /></Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>)
+                    }
+                </div>
+                
             </section>
         </div>
     );
