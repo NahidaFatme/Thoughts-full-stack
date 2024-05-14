@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "./AuthProvider";
+import { Link} from "react-router-dom";
 import bg1 from "../Images/bg1.png";
 import '../index.css';
 import { TfiThought } from "react-icons/tfi";
@@ -13,10 +14,9 @@ import tech from "../Images/9614596.jpg";
 import axios from "axios";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { TbListDetails } from "react-icons/tb";
-import { Link, useLoaderData } from "react-router-dom";
 import { FaHeartCirclePlus } from "react-icons/fa6";
 import { ToastContainer, toast } from 'react-toastify';
-
+import newsletter from "../Images/newsletter.png";
 
 const Banner = () => {
 
@@ -59,17 +59,26 @@ const Banner = () => {
         }
     };
 
+    const handleSubscribe = e =>{
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        if (email){
+            toast.success("Thank you for subscribing to our newsletter");
+            form.email.value = "";
+        }
+    }
     return (
         <div>
-            <section className="my-16 flex items-center gap-12">
-                <div className="flex flex-col gap-12 text-left w-1/2">
-                    <h1 className="text-4xl font-bold flex gap-3">What Are Your 
+            <section className="my-16 flex flex-col md:flex-row items-center gap-12">
+                <div className="flex flex-col gap-12 text-left w-full md:w-1/2">
+                    <h1 className="text-4xl font-bold flex flex-col md:flex-row gap-3">What Are Your 
                         <span className="flex items-center gap-3 text-[#ff6481]">Thoughts <TfiThought /></span>
                     </h1>
                     <p className="text-lg font-medium text-justify">Step into Thoughts, where stories take flight. A place where words dance and dreams alight. With each blog post, a world unfurls. In the realm of Thoughts, imagination swirls.</p>
-                    <button className="bg-[#ff6481] text-lg font-semibold text-slate-100 rounded-md py-3 w-full">Start Sharing</button>
+                    <Link to="/AllBlogs" className="bg-[#ff6481] text-lg font-semibold text-slate-100 rounded-md py-3 w-full text-center">Start Sharing</Link>
                 </div>
-                <div className="w-1/2">
+                <div className="w-full md:w-1/2">
                     <img src={bg1} alt="" />
                 </div>
             </section>
@@ -78,7 +87,7 @@ const Banner = () => {
             {/* topics */}
             <section className="">
                 <p className=" text-2xl font-bold flex gap-3 justify-center">Trending Topics <FaBolt className="text-[#ff6481] mb-12" /></p>
-                <div className="bg-white shadow-md w-4/5 h-full flex items-center justify-evenly rounded-full px-10 pt-8 pb-12 mx-auto">
+                <div className="bg-white shadow-md w-4/5 h-full flex flex-col md:flex-row items-center justify-evenly rounded-full px-10 pt-8 pb-12 mx-auto gap-12 md:gap-0">
                     <div className="w-20 h-20 rounded-full flex flex-col gap-3">
                         <img src={travel} className="rounded-full object-cover object-center" />
                         <p className="text-sm text-stone-500 font-semibold">Adventure</p>
@@ -108,7 +117,7 @@ const Banner = () => {
 
 
             {/* wishlist */}
-            <section className="my-36">
+            <section className="my-20 md:my-36">
                 <p className=" text-2xl font-bold flex gap-3 justify-center">Recent Blogs<FaBolt className="text-[#ff6481] mb-12" /></p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
                     {
@@ -132,6 +141,25 @@ const Banner = () => {
                     }
                 </div>
                 
+            </section>
+
+            {/* newsletter */}
+            <section>
+                <div className="flex flex-col md:flex-row bg-white rounded-xl shadow-md items-center">
+                    <div className="w-full md:w-1/2 h-[250px] md:h-[500px] bg-[#d3d3ff] rounded-t-xl md:rounded-l-xl">
+                        <img src={newsletter} className="w-full h-full" />
+                    </div>
+                    <div className="w-full md:w-1/2 text-center md:text-right p-3 md:p-10 flex flex-col gap-10">
+                        <h1 className="text-[#6355a4] text-3xl md:text-4xl font-bold">Subscribe To Newsletter</h1>
+                        <p className="text-sm font-medium text-center md:text-right">
+                            Stay in the loop with our latest updates! Subscribe to our newsletter and unlock exclusive content, articles, and exciting announcements delivered straight to your inbox.
+                        </p>
+                        <form onSubmit={handleSubscribe} className="flex flex-col md:flex-row justify-end items-center gap-3">
+                            <input type="text" name="email" placeholder="Email" className="input input-bordered input-primary w-full max-w-xs" />
+                            <button className="bg-[#6355a4] text-white text-base font-semibold px-5 py-3 rounded-md">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
             </section>
         </div>
     );
