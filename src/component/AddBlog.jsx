@@ -40,6 +40,12 @@ const AddBlog = () => {
           .then(data => {
             if(data.data.insertedId){
                 toast.success("Blog added successfully");
+                form.full_description.value = "";
+                form.short_description.value = "";
+                form.category.value = "";
+                form.title.value = "";
+                form.photo.value = "";
+                
             }
           })
           .catch(function (error) {
