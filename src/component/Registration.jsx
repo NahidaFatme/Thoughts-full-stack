@@ -49,6 +49,7 @@ const Registration = () => {
                 };
                 setUser(updatedUser);
                 toast.success("Registration successful");
+
             })
           })
           .catch(error => {
@@ -63,14 +64,14 @@ const Registration = () => {
     return (
         <div>
            <div className="hero min-h-screen mt-16">
-                <div className="hero-content flex flex-col gap-5 w-full">
+                <div className="hero-content flex flex-col gap-0 md:gap-5 md:w-full">
                     <div className="text-center lg:text-center">
                         <h1 className="mx-auto pacifico text-[#ff6481] text-4xl md:text-6xl lg:text-5xl font-bold animate__animated animate__backInRight">Register Now</h1>
                         <br />
                         <h1 className="text-[#ff6481] text-base md:text-base lg:text-base font-bold animate__animated animate__backInRight">Create a new account and hop in board !
                         </h1>
                     </div>
-                    <div className="card shrink-0 w-11/12 md:w-[60%] h-full bg-white shadow-2xl animate__animated animate__backInUp">
+                    <div className="card p-0 md:p-10 shrink-0 w-full md:w-[60%] h-full bg-white shadow-2xl animate__animated animate__backInUp">
                     <form onSubmit={handleRegistration} className="card-body">
                         <div className="form-control">
                         <label className="label">
@@ -100,7 +101,7 @@ const Registration = () => {
                             name="password" 
                             placeholder="password" 
                             className="input input-bordered md:grow" required />
-                        <span onClick={ () => setShowPassword(!showpassword)} className="absolute right-0 md:right-4 text-2xl top-3">
+                        <span onClick={ () => setShowPassword(!showpassword)} className="absolute right-4 md:right-4 text-2xl top-3">
                             {
                                 showpassword ? <FaEyeSlash /> : <FaEye />
                             }

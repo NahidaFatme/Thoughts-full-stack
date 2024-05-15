@@ -9,16 +9,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../index.css';
 import 'animate.css'
 const Login = () => {
-    const { loginUser, loginGoogle, loading, loginGithub } = useContext(AuthContext);
-
-    if (loading) {
+    const { loginUser, loginGoogle, loading } = useContext(AuthContext);
+    const [submitting, setSubmitting] = useState(false);
+    if (loading || submitting) {
         return <span className="loading loading-spinner loading-lg"></span>
     }
     
     const location = useLocation();
     const navigate = useNavigate();
     const provider = new GoogleAuthProvider();
-    const Gitprovider = new GithubAuthProvider();
+
 
     const handleLogin = e => {
         e.preventDefault();
@@ -34,7 +34,11 @@ const Login = () => {
           .catch((error) => {
             const errorMessage = error.message;
             toast.error("Invalid email or password");
-          });
+            navigate(location?.state ? location.state : './')
+          })
+          .finally(() => {
+            setSubmitting(false); // Stop loading
+        });
     };
 
     const handleSigninGoogle = () => {
@@ -68,7 +72,7 @@ const Login = () => {
                         </Link>
                         </h1>
                     </div>
-                    <div className="card shrink-0 w-4/5 md:w-[60%] h-full shadow-2xl bg-white animate__animated animate__backInUp">
+                    <div className="card p-0 md:p-10 shrink-0 w-full md:w-[60%] h-full shadow-2xl bg-white animate__animated animate__backInUp">
                     <form onSubmit={handleLogin} className="card-body">
                         <div className="form-control">
                         <label className="label">
