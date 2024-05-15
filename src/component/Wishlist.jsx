@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "./AuthProvider";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { TbListDetails } from "react-icons/tb";
 import Swal from "sweetalert2";
@@ -67,7 +67,7 @@ const Wishlist = () => {
                             <div className="text-xl font-semibold flex items-center justify-center gap-3">
                                 <p  onClick={() => handleDelete(wishlistblog._id)} className="text-[#ff6481] hover:text-[#31292d]"><RiDeleteBin5Fill /></p>
                                 <p className="text-[#ff6481]">|</p>
-                                <p className="text-[#2a9df4] hover:text-[#31292d]"><TbListDetails /></p>
+                                <Link  to={`/Details/${wishlistblog.blogId}`} className="text-[#2a9df4] hover:text-[#31292d]"><TbListDetails /></Link>
                             </div>
                             {/* Add an empty flex item to stretch and fill the remaining space */}
                             <div className="flex-grow"></div>

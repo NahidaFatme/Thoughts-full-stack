@@ -121,7 +121,7 @@ const Banner = () => {
             {/* Recent blogs */}
             <section className="my-20 md:my-36">
                 <p className=" text-2xl font-bold flex gap-3 justify-center">Recent Blogs<FaBolt className="text-[#ff6481] mb-12" /></p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-9 lg::gap-16">
                     {
                         blogs.map(blog => <div>
                             <div className="bg-white w-full shadow-md rounded-xl">
@@ -145,24 +145,24 @@ const Banner = () => {
             </section>
 
             {/* chapter 1 */}
-            <section className="flex justify-end my-20 md:my-36">
-                <div className="relative text-rignt w-9/12 h-[600px] bg-white shadow-lg rounded-xl p-14">
-                    <div className="w-96 h-96 rounded-xl absolute -left-40 top-28">
+            <section className="flex flex-col md:flex-row justify-end my-20 md:my-36">
+                <div className="static md:relative text-rignt w-full md:w-9/12 h-full bg-white shadow-lg rounded-xl p-3  md:p-10 lg::p-14">
+                    <div className="w-full h-full md:w-96 md:h-96 rounded-xl static md:absolute left-0 md:-left-40  top-0 md:top-28">
                         <img src={boy} className="rounded-xl" />
                     </div>
-                    <div className="flex flex-col gap-6 pl-60">
+                    <div className="flex flex-col gap-6 p-4 md:pl-52 lg:pl-60">
                         <h1 className="text-3xl font-semibold text-left text-[#ff6481]">Chapter One</h1>
                         <div className=" flex flex-col gap-6">
-                            <p className="text-sm font-semibold text-justify text-gray-500">
+                            <p className="text-xs md:text-sm font-semibold text-justify text-gray-500">
                             To want to learn to write is to embark on an odyssey of self-discovery and expression. It's about delving into the depths of your mind and unleashing the torrent of ideas that lie within. Writing is more than just putting words on a page; it's about crafting stories that resonate with readers, painting pictures with prose, and capturing moments in time with the stroke of a pen.
                             </p>
-                            <p className="text-sm font-semibold text-justify text-gray-500">
+                            <p className="text-xs md:text-sm font-semibold text-justify text-gray-500">
                             As you step into the world of writing, you'll find that every word holds power, every sentence a story waiting to be told. It's a journey of exploration and growth, where you'll learn to navigate the winding paths of plot and character, the peaks and valleys of tension and resolution.
                             </p>
-                            <p className="text-sm font-semibold text-justify text-gray-500">
+                            <p className="text-xs md:text-sm font-semibold text-justify text-gray-500">
                             But writing is not just about technique; it's about passion and perseverance. It's about finding your voice amidst the cacophony of voices in the literary landscape and daring to speak your truth. It's about embracing vulnerability and authenticity, and letting your words become a beacon of hope in a world hungry for connection.
                             </p>
-                            <p className="text-sm font-semibold text-justify text-gray-500">
+                            <p className="text-xs md:text-sm font-semibold text-justify text-gray-500">
                                 So, if you're ready to embark on this adventure, remember that the blank page is your canvas, and the possibilities are endless. Whether you're penning articles or weaving stories, each word you write is a step forward on your journey to becoming a writer. So, pick up your pen, and let your imagination take flight.
                             </p>
                         </div>
@@ -172,7 +172,7 @@ const Banner = () => {
 
              {/*donation  */}
             <section className="my-20 md:my-56">
-                    <div className="grid grid-cols-3 gap-10 items-center justify-center">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center justify-center">
                         <div>
                             <h1 className="text-5xl font-bold ">Will you buys us a 
                             <span className=" text-amber-600"> Cookie ? </span>
