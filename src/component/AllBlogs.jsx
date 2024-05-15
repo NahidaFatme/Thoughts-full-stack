@@ -67,34 +67,32 @@ const AllBlogs = () => {
     };
     
 
-    const handleSearch = async () => {
-        try {
-            // axios.get(`http://localhost:5000/blogs/search?query=${query}`)
-            // .then(response => {
-            //     setBlogs(response.data);
-            //     console.log(response.data);
-            // })
-
-            const response = await axios.get(`http://localhost:5000/blogs/search?query=${query}`);
-        if (Array.isArray(response.data)) { // Check if response data is an array
-            setBlogs(response.data);
-        } else {
-            setBlogs([]); // Set empty array if response data is not an array
-        }
-        console.log(response.data);
-            
-        } catch (error) {
-            console.error(error);
-        }
+    const handleSearch = e => {
+        e.preventDefault();
+        const search = e.target.elements.search.value;
+        axios.get(`http://localhost:5000/blogs/search/${search}`)
+            .then(res => {
+                console.log(res.data);
+                setBlogs(res.data);
+                
+            })
+            .catch(error => {
+                console.error(error);
+            });
     };
+
+    const handleReset = () =>{
+        setBlogs(loadedBlogs);
+    }
 
     return (
         <div className="mx-auto py-0 md:py-16">
             <div className="text-center mt-10 mb-10 md:mb-16">
                 <h1 className="mx-auto flex gap-4 justify-center text-[#ff6481] text-2xl md:text-4xl font-bold animate__animated animate__backInRight">Read Amazing Blogs <FaReadme /></h1>
             </div>
-            {/* filter and search */}
+            {/* filter and search and reset*/}
             <div className="w-full md:w-3/4 text-center mx-auto flex flex-col-reverse md:flex-row gap-3 md:gap-0 justify-between mb-8">
+                {/* filter */}
                 <div className="flex">
                     <label className="label border-2 py-3 px-6 bg-[#ff6481] text-white   rounded-l-full">Filter</label>
                     <div className="dropdown">
@@ -118,12 +116,18 @@ const AllBlogs = () => {
                         </ul>
                     </div>
                 </div>
+                {/* reset */}
+                <div>
+                    <button onClick={handleReset} className="flex items-center gap-3 border-2 py-3 px-10 bg-[#ff6481]  text-white rounded-full hover:bg-[#31292d]">Reset</button>
+                </div>
                 {/* search option */}
                 <div>
+                    <form onSubmit={handleSearch}>
                     <label className="input input-bordered flex items-center gap-2">
-                        <input type="text" placeholder="Search by title" value={query} onChange={(e) => setQuery(e.target.value)} className="grow" />
-                        <button onClick={handleSearch}><FaSearch /></button>
+                        <input type="text" name="search" placeholder="Search by title" className="grow" />
+                        <button ><FaSearch /></button>
                     </label>
+                    </form>
                 </div>
             </div>
             {
