@@ -52,7 +52,7 @@ const AllBlogs = () => {
             const wishBlog = { full_description, short_description, category, title, photo, email, blogId };
     
             // Make a POST request to add the wishlist blog to the server
-            axios.post('http://localhost:5000/wishlist', wishBlog, { withCredentials: true })
+            axios.post('https://thoughts-server-zeta.vercel.app/wishlist', wishBlog, { withCredentials: true })
                 .then(response => {
                     if (response.data.insertedId) {
                         toast.success("Blog added to Wishlist");
@@ -70,9 +70,8 @@ const AllBlogs = () => {
     const handleSearch = e => {
         e.preventDefault();
         const search = e.target.elements.search.value;
-        axios.get(`http://localhost:5000/blogs/search/${search}`)
+        axios.get(`https://thoughts-server-zeta.vercel.app/blogs/search/${search}`)
             .then(res => {
-                console.log(res.data);
                 setBlogs(res.data);
                 
             })

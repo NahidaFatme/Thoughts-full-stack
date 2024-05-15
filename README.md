@@ -2,9 +2,9 @@
 
 Welcome to Thoughts, where you can discover a wealth of inspiration and creativity by creative writer and their articles/blogs. Dive into compelling stories, engaging discussions, and a vibrant community. With a user-friendly interface and effortless navigation, Thoughts provides a welcoming space for exploration and self-expression.
 
-- [Thoughts Website Link](https://paper-craft-d0a6e.web.app/)
-- [https://paper-craft-d0a6e.web.app/](https://paper-craft-d0a6e.web.app/)
-- [ServerSide Link](https://paper-craft-server.vercel.app/)
+- [Thoughts Website Link](https://thoughts-a655a.web.app/)
+- [https://thoughts-a655a.web.app/](https://thoughts-a655a.web.app/)
+- [ServerSide Link](https://thoughts-server-zeta.vercel.app/)
 
 
 B9 A11 (assignment_category_0006)

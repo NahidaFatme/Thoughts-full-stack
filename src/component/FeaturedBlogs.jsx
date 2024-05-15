@@ -21,7 +21,7 @@ const FeaturedBlogs = () => {
     const [topBlogs, setTopBlogs] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/blogs')
+        axios.get('https://thoughts-server-zeta.vercel.app/blogs')
             .then(response => {
                 const sortedTopBlogs = response.data.sort((a, b) => b.full_description.length - a.full_description.length);
                 const filteredTopBlogs = sortedTopBlogs.slice(0, 10);

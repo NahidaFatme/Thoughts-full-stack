@@ -13,7 +13,7 @@ const Wishlist = () => {
     
     useEffect(() => {
         document.title = "Wishlist";
-        axios.get('http://localhost:5000/wishlist', { withCredentials: true })
+        axios.get('https://thoughts-server-zeta.vercel.app/wishlist', { withCredentials: true })
             .then(res => setWishlistblogs(res.data))
             .catch(error => console.error('Fetch wishlist error', error));
     }, []);
@@ -32,7 +32,7 @@ const Wishlist = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:5000/wishlist/delete/${_id}`, { withCredentials: true })
+                axios.delete(`https://thoughts-server-zeta.vercel.app/wishlist/delete/${_id}`, { withCredentials: true })
                     .then(data => {
                         if (data.data.deletedCount > 0) {
                             Swal.fire(

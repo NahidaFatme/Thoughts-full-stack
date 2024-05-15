@@ -20,7 +20,6 @@ const Registration = () => {
         const photoURL = e.target.URL.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(name, email, password, photoURL);
         if (password.length < 6){
             toast.error("Password must be at least 6 characters");
             return;
@@ -50,7 +49,6 @@ const Registration = () => {
                 };
                 setUser(updatedUser);
                 toast.success("Registration successful");
-                console.log(user);
             })
           })
           .catch(error => {

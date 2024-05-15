@@ -20,7 +20,7 @@ const Details = () => {
     useEffect(() => {
         document.title = "Details";
         // Fetch blog details
-        axios.get(`http://localhost:5000/blogs/id/${id}`, { withCredentials: true })
+        axios.get(`https://thoughts-server-zeta.vercel.app/blogs/id/${id}`, { withCredentials: true })
             .then(res => {
                 setBlog(res.data);
             })
@@ -30,7 +30,7 @@ const Details = () => {
     }, []);
 
     const fetchComments = () => {
-        axios.get(`http://localhost:5000/comments/id/${loadedBlogs._id}`)
+        axios.get(`https://thoughts-server-zeta.vercel.app/comments/id/${loadedBlogs._id}`)
             .then(res => {
                 setComments(res.data);
             })
@@ -57,7 +57,7 @@ const Details = () => {
 
         const Onecomment = {comment, commenter_name, commenter_photo, blogId};
 
-        axios.post('http://localhost:5000/comments', Onecomment, { withCredentials: true })
+        axios.post('https://thoughts-server-zeta.vercel.app/comments', Onecomment, { withCredentials: true })
           .then(data => {
             if(data.data.insertedId){
                 toast.success("Comment added");

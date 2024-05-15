@@ -36,7 +36,7 @@ const AddBlog = () => {
 
 
         // fetch data using axios 
-        axios.post('http://localhost:5000/blogs', newBlogs, { withCredentials: true })
+        axios.post('https://thoughts-server-zeta.vercel.app/blogs', newBlogs, { withCredentials: true })
           .then(data => {
             if(data.data.insertedId){
                 toast.success("Blog added successfully");

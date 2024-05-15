@@ -28,7 +28,7 @@ const Banner = () => {
     
     // get recent blogs
     useEffect(() => {
-        axios.get('http://localhost:5000/blogs/recent')
+        axios.get('https://thoughts-server-zeta.vercel.app/blogs/recent')
         .then(res => {
             setBlogs(res.data);
         })
@@ -47,7 +47,7 @@ const Banner = () => {
             const wishBlog = { full_description, short_description, category, title, photo, email };
     
             // Make a POST request to add the wishlist blog to the server
-            axios.post('http://localhost:5000/wishlist', wishBlog, { withCredentials: true })
+            axios.post('https://thoughts-server-zeta.vercel.app/wishlist', wishBlog, { withCredentials: true })
                 .then(response => {
                     if (response.data.insertedId) {
                         toast.success("Blog added to Wishlist");

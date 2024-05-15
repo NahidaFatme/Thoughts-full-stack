@@ -16,7 +16,7 @@ const Update = () => {
     useEffect(() => {
         document.title = "Update Blog";
         // Fetch blog details
-        axios.get(`http://localhost:5000/blogs/id/${id}`, { withCredentials: true })
+        axios.get(`https://thoughts-server-zeta.vercel.app/blogs/id/${id}`, { withCredentials: true })
             .then(res => {
                 setBlog(res.data);
             })
@@ -39,7 +39,7 @@ const Update = () => {
 
         const updatedBlog = { title, category, short_description, full_description, photo};
 
-        axios.put( `http://localhost:5000/blogs/update/${blog._id}`, updatedBlog)
+        axios.put( `https://thoughts-server-zeta.vercel.app/blogs/update/${blog._id}`, updatedBlog)
         .then(data => {
             if(data.data.modifiedCount > 0){
                 toast.success("Blog Updated Successfully");

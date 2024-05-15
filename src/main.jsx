@@ -40,7 +40,7 @@ import {
       },
       { path: "/AllBlogs",
       element: <AllBlogs></AllBlogs>,
-      loader: () => fetch('http://localhost:5000/blogs')
+      loader: () => fetch('https://thoughts-server-zeta.vercel.app/blogs')
       },
       { path: "/FeaturedBlogs",
       element: <FeaturedBlogs></FeaturedBlogs>
