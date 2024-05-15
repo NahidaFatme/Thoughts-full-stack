@@ -17,7 +17,9 @@ import { TbListDetails } from "react-icons/tb";
 import { FaHeartCirclePlus } from "react-icons/fa6";
 import { ToastContainer, toast } from 'react-toastify';
 import newsletter from "../Images/newsletter.png";
-
+import boy from "../Images/1.png";
+import { motion } from "framer-motion";
+import cookie from "../Images/cookie.png";
 const Banner = () => {
 
     const { user } = useContext(AuthContext);
@@ -76,7 +78,7 @@ const Banner = () => {
                         <span className="flex items-center gap-3 text-[#ff6481]">Thoughts <TfiThought /></span>
                     </h1>
                     <p className="text-lg font-medium text-justify">Step into Thoughts, where stories take flight. A place where words dance and dreams alight. With each blog post, a world unfurls. In the realm of Thoughts, imagination swirls.</p>
-                    <Link to="/AllBlogs" className="bg-[#ff6481] text-lg font-semibold text-slate-100 rounded-md py-3 w-full text-center">Start Sharing</Link>
+                    <Link to="/AllBlogs" className="bg-[#ff6481] text-lg font-semibold text-slate-100 rounded-md py-3 w-full text-center hover:bg-[#31292d]">Start Sharing</Link>
                 </div>
                 <div className="w-full md:w-1/2">
                     <img src={bg1} alt="" />
@@ -116,7 +118,7 @@ const Banner = () => {
             </section>
 
 
-            {/* wishlist */}
+            {/* Recent blogs */}
             <section className="my-20 md:my-36">
                 <p className=" text-2xl font-bold flex gap-3 justify-center">Recent Blogs<FaBolt className="text-[#ff6481] mb-12" /></p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
@@ -140,9 +142,65 @@ const Banner = () => {
                         </div>)
                     }
                 </div>
-                
             </section>
 
+            {/* chapter 1 */}
+            <section className="flex justify-end my-20 md:my-36">
+                <div className="relative text-rignt w-9/12 h-[600px] bg-white shadow-lg rounded-xl p-14">
+                    <div className="w-96 h-96 rounded-xl absolute -left-40 top-28">
+                        <img src={boy} className="rounded-xl" />
+                    </div>
+                    <div className="flex flex-col gap-6 pl-60">
+                        <h1 className="text-3xl font-semibold text-left text-[#ff6481]">Chapter One</h1>
+                        <div className=" flex flex-col gap-6">
+                            <p className="text-sm font-semibold text-justify text-gray-500">
+                            To want to learn to write is to embark on an odyssey of self-discovery and expression. It's about delving into the depths of your mind and unleashing the torrent of ideas that lie within. Writing is more than just putting words on a page; it's about crafting stories that resonate with readers, painting pictures with prose, and capturing moments in time with the stroke of a pen.
+                            </p>
+                            <p className="text-sm font-semibold text-justify text-gray-500">
+                            As you step into the world of writing, you'll find that every word holds power, every sentence a story waiting to be told. It's a journey of exploration and growth, where you'll learn to navigate the winding paths of plot and character, the peaks and valleys of tension and resolution.
+                            </p>
+                            <p className="text-sm font-semibold text-justify text-gray-500">
+                            But writing is not just about technique; it's about passion and perseverance. It's about finding your voice amidst the cacophony of voices in the literary landscape and daring to speak your truth. It's about embracing vulnerability and authenticity, and letting your words become a beacon of hope in a world hungry for connection.
+                            </p>
+                            <p className="text-sm font-semibold text-justify text-gray-500">
+                                So, if you're ready to embark on this adventure, remember that the blank page is your canvas, and the possibilities are endless. Whether you're penning articles or weaving stories, each word you write is a step forward on your journey to becoming a writer. So, pick up your pen, and let your imagination take flight.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             {/*donation  */}
+            <section className="my-20 md:my-56">
+                    <div className="grid grid-cols-3 gap-10 items-center justify-center">
+                        <div>
+                            <h1 className="text-5xl font-bold ">Will you buys us a 
+                            <span className=" text-amber-600"> Cookie ? </span>
+                            </h1>
+                        </div>
+                        <motion.div
+                            className="w-full h-48 flex items-center justify-center"
+                            animate={{
+                                scale: [1, 2, 2, 1, 1],
+                                rotate: [0, 0, 180, 180, 0],
+                                borderRadius: ["0%", "0%", "0%", "0%", "0%"]
+                            }}
+                            transition={{
+                                duration: 2,
+                                ease: "easeInOut",
+                                times: [0, 0.2, 0.5, 0.8, 1],
+                                repeat: Infinity,
+                                repeatDelay: 1
+                            }}>
+                                <img src={cookie} className="w-48 h-48" />
+                        </motion.div>
+                        <div className="flex flex-col gap-8">
+                            <h1 className="text-5xl font-bold ">Donate and help us grow
+                            </h1>
+                            <button className="w-full p-3 bg-amber-600 hover:bg-[#31292d] text-white font-bold text-xl rounded-lg ">Donate Here</button>
+                        </div>
+                    </div>
+            </section>
             {/* newsletter */}
             <section>
                 <div className="flex flex-col md:flex-row bg-white rounded-xl shadow-md items-center">
